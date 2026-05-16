@@ -58,7 +58,7 @@ function showStatus(message, type = 'info') {
     statusMessage.className = `status-message active ${type}`;
     setTimeout(() => {
         statusMessage.classList.remove('active');
-    }, 15000);
+    }, 5000);
 }
 
 function showLoading(show = true, text ='جاري معالجة طلبك...') {
