@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceMotion AI - تحريك الوجوه بالذكاء الاصطناعي</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">FaceMotion AI</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link active" data-page="home">الرئيسية</a>
+                    <a href="#" class="nav-link" data-page="about">حول</a>
+                    <a href="#" class="nav-link" data-page="instructions">التعليمات</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Home Page -->
+            <div id="home-page" class="page active">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">حول وجهك إلى فيديو متحرك</h1>
+                        <p class="hero-subtitle">تقنية الذكاء الاصطناعي الأحدث لتحريك الوجوه وإضفاء الحياة على صورك</p>
+                        <button class="btn btn-hero" id="startBtn">
+                            <span>ابدأ الآن</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status Message -->
+                <div id="statusMessage" class="status-message"></div>
+
+                <!-- Upload Progress -->
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-step active" id="step1-progress">
+                        <div class="progress-number">1</div>
+                        <p>الصورة الأمامية</p>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" id="step2-progress">
+                        <div class="progress-number">2</div>
+                        <p>الجانب الأيمن</p>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" id="step3-progress">
+                        <div class="progress-number">3</div>
+                        <p>الجانب الأيسر</p>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" id="step4-progress">
+                        <div class="progress-number">4</div>
+                        <p>وصف الطلب</p>
+                    </div>
+                </div>
+
+                <!-- Step 1: Front Photo -->
+                <div id="step1" class="step" style="display: none;">
+                    <div class="step-card">
+                      <div style="text-align: center; margin-bottom: 20px;">
+    <img src="ImageFront.jpg" alt="أمامي" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+                        <h2>الخطوة 1: صورة أمامية</h2>
+                        <p class="step-description">التقط صورة واضحة لوجهك من الأمام مباشرة</p>
+                        
+                        <div class="instruction-tips">
+                            <div class="tip">✓ تأكد من إضاءة جيدة</div>
+                            <div class="tip">✓ انظر مباشرة للكاميرا</div>
+                            <div class="tip">✓ وجهك يجب أن يكون واضحاً</div>
+                        </div>
+
+                        <div class="preview-container">
+                            <img id="preview1" class="preview-image" alt="معاينة الصورة الأمامية">
+                        </div>
+
+                        <button class="btn btn-capture" id="capture1Btn">
+                            <span class="btn-icon">📷</span>
+                            <span>التقط صورة أمامية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Right Photo -->
+                <div id="step2" class="step" style="display: none;">
+                    <div class="step-card">
+                        <div style="text-align: center; margin-bottom: 20px;">
+    <img src="ImageRight.jpg" alt="يمين" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+                        <h2>الخطوة 2: صورة الجانب الأيمن</h2>
+                        <p class="step-description">أدر رأسك نحو اليمين والتقط صورة</p>
+                        
+                        <div class="instruction-tips">
+                            <div class="tip">✓ أدر رأسك 45 درجة لليمين</div>
+                            <div class="tip">✓ حافظ على الإضاءة الجيدة</div>
+                            <div class="tip">✓ وجهك يجب أن يكون واضحاً</div>
+                        </div>
+
+                        <div class="preview-container">
+                            <img id="preview2" class="preview-image" alt="معاينة صورة جانب يمين">
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn btn-secondary" id="backStep2Btn">← رجوع</button>
+                            <button class="btn btn-capture" id="capture2Btn">
+                                <span class="btn-icon">📷</span>
+                                <span>التقط صورة جانب يمين</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Left Photo -->
+                <div id="step3" class="step" style="display: none;">
+                    <div class="step-card">
+                       <div style="text-align: center; margin-bottom: 20px;">
+    <img src="ImageLeft.jpg" alt="يسار" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+</div>
+
+                        <h2>الخطوة 3: صورة الجانب الأيسر</h2>
+                        <p class="step-description">أدر رأسك نحو اليسار والتقط صورة</p>
+                        
+                        <div class="instruction-tips">
+                            <div class="tip">✓ أدر رأسك 45 درجة لليسار</div>
+                            <div class="tip">✓ حافظ على الإضاءة الجيدة</div>
+                            <div class="tip">✓ وجهك يجب أن يكون واضحاً</div>
+                        </div>
+
+                        <div class="preview-container">
+                            <img id="preview3" class="preview-image" alt="معاينة صورة جانب يسار">
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn btn-secondary" id="backStep3Btn">← رجوع</button>
+                            <button class="btn btn-capture" id="capture3Btn">
+                                <span class="btn-icon">📷</span>
+                                <span>التقط صورة جانب يسار</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Request Description -->
+                <div id="step4" class="step" style="display: none;">
+                    <div class="step-card">
+                        <div class="instruction-animation">
+                            <svg class="face-animation front" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="80" fill="#FFD6A5" stroke="#333" stroke-width="2"/>
+                                <circle cx="75" cy="85" r="8" fill="#333"/>
+                                <circle cx="125" cy="85" r="8" fill="#333"/>
+                                <line x1="100" y1="100" x2="100" y2="120" stroke="#333" stroke-width="2"/>
+                                <path d="M 80 135 Q 100 150 120 135" stroke="#333" stroke-width="2" fill="none"/>
+                                <text x="100" y="175" text-anchor="middle" font-size="14" fill="#333">صِف طلبك</text>
+                            </svg>
+                        </div>
+                        <h2>الخطوة 4: وصف طلبك</h2>
+                        <p class="step-description">أخبرنا بما تريد تحويل صورتك إليه</p>
+                        
+                        <div class="request-box">
+                            <label for="requestText">وصف الفيديو المطلوب:</label>
+                            <textarea id="requestText" placeholder="مثال: حول صورتي إلى فيديو أنا أقاتل مع الأعداء، أو حول صورتي إلى رسم زيتي متحرك..." rows="5"></textarea>
+                            <div class="char-count">
+                                <span id="charCount">0</span> / 500 حرف
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn btn-secondary" id="backStep4Btn">← رجوع</button>
+                            <button class="btn btn-submit" id="submitBtn">
+                                <span class="btn-icon">⚡</span>
+                                <span>بدء المعالجة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <div class="success-card">
+                        <div class="success-icon">✅</div>
+                        <h2>تم الإرسال بنجاح!</h2>
+                        <p>سيتم معالجة طلبك قريباً وإرسال النتيجة إليك</p>
+                        <button class="btn btn-primary" id="restartBtn">
+                            <span>ابدأ من جديد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Page -->
+            <div id="about-page" class="page">
+                <div class="page-card">
+                    <h1>حول FaceMotion AI</h1>
+                    <p>FaceMotion AI هي منصة متقدمة تستخدم تقنيات الذكاء الاصطناعي الحديثة لتحويل صورك الثابتة إلى فيديوهات متحركة احترافية. نحن نقدم حلاً سهلاً وفعالاً لإضفاء الحياة على صورك.</p>
+                    
+                    <h2>مميزاتنا</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>معالجة سريعة</h3>
+                            <p>تحويل فوري لصورك باستخدام أحدث نماذج الذكاء الاصطناعي</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎨</div>
+                            <h3>جودة عالية</h3>
+                            <p>احصل على فيديوهات متحركة بجودة احترافية وسلسة</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>آمن وخاص</h3>
+                            <p>بيانات آمنة وخصوصية محمية بأعلى معايير الأمان</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🌍</div>
+                            <h3>عالمي</h3>
+                            <p>يدعم لغات متعددة ويعمل على جميع الأجهزة</p>
+                        </div>
+                    </div>
+
+                    <h2>فريقنا</h2>
+                    <p>نحن فريق من المتخصصين في الذكاء الاصطناعي والتصميم، مكرسون لتقديم أفضل تجربة للمستخدمين.</p>
+                </div>
+            </div>
+
+            <!-- Instructions Page -->
+            <div id="instructions-page" class="page">
+                <div class="page-card">
+                    <h1>التعليمات والمساعدة</h1>
+                    
+                    <h2>كيفية استخدام FaceMotion AI</h2>
+                    
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>التقط صورة أمامية</h3>
+                            <p>ابدأ بالتقاط صورة واضحة لوجهك من الأمام مباشرة. تأكد من أن الإضاءة جيدة وأن وجهك مرئي بوضوح.</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>التقط صورة من الجانب الأيمن</h3>
+                            <p>أدر رأسك نحو اليمين بزاوية 45 درجة تقريباً والتقط صورة. هذا يساعد الذكاء الاصطناعي على فهم شكل وجهك بشكل أفضل.</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>التقط صورة من الجانب الأيسر</h3>
+                            <p>أدر رأسك نحو اليسار بزاوية 45 درجة تقريباً والتقط صورة. تأكد من الحفاظ على نفس الإضاءة والخلفية.</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>أدخل وصف طلبك</h3>
+                            <p>اكتب وصفاً مفصلاً لما تريد تحويل صورتك إليه. كلما كان الوصف أكثر تفصيلاً، كانت النتيجة أفضل.</p>
+                        </div>
+                    </div>
+
+                    <h2>نصائح للحصول على أفضل النتائج</h2>
+                    <ul class="tips-list">
+                        <li>استخدم إضاءة طبيعية أو إضاءة جيدة للحصول على صور واضحة</li>
+                        <li>تأكد من أن وجهك يشغل معظم الصورة</li>
+                        <li>تجنب الظلال على وجهك</li>
+                        <li>استخدم خلفية بسيطة وغير معقدة</li>
+                        <li>اكتب وصفاً واضحاً ومفصلاً لطلبك</li>
+                    </ul>
+
+                    <h2>الأسئلة الشائعة</h2>
+                    <div class="faq">
+                        <div class="faq-item">
+                            <h4>كم من الوقت يستغرق معالجة الطلب؟</h4>
+                            <p>عادة ما يستغرق معالجة الطلب من 5 إلى 15 دقيقة حسب تعقيد الطلب.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>هل صوري آمنة؟</h4>
+                            <p>نعم، جميع صورك آمنة وتُحذف تلقائياً بعد المعالجة. لا نحتفظ بأي بيانات شخصية.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>ما هي صيغ الفيديو المدعومة؟</h4>
+                            <p>نحن ننتج فيديوهات بصيغة MP4 وWebM بجودة عالية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading" class="loading-overlay">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loadingText">جاري معالجة طلبك...</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 FaceMotion AI - تقنية الذكاء الاصطناعي المتقدمة</p>
+        </footer>
+    </div>
+
+    <!-- Hidden Input for Camera Capture -->
+    <input type="file" id="cameraInput" accept="image/*" capture="user" style="display: none;">
+
+    <script src="app.js"></script>
+</body>
+</html>
