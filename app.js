@@ -58,10 +58,10 @@ function showStatus(message, type = 'info') {
     statusMessage.className = `status-message active ${type}`;
     setTimeout(() => {
         statusMessage.classList.remove('active');
-    }, 5000);
+    }, 15000);
 }
 
-function showLoading(show = true, text = 'جاري معالجة طلبك، يرجى الانتظار...') {
+function showLoading(show = true, text ='جاري معالجة طلبك...') {
     if (show) {
         loading.classList.add('active');
         loadingText.textContent = text;
@@ -141,19 +141,19 @@ function captureImage(stepNumber) {
                     preview1.src = imageData;
                     uploadImageToServer(file, 'front');
                     showStatus('تم التقاط الصورة الأمامية ✓', 'success');
-                    setTimeout(() => goToStep(2), 3000);
+                    setTimeout(() => goToStep(2), 1000);
                 } else if (stepNumber === 2) {
                     state.images.right = file;
                     preview2.src = imageData;
                     uploadImageToServer(file, 'right');
                     showStatus('تم التقاط صورة جانب يمين ✓', 'success');
-                    setTimeout(() => goToStep(3), 3000);
+                    setTimeout(() => goToStep(3), 1000);
                 } else if (stepNumber === 3) {
                     state.images.left = file;
                     preview3.src = imageData;
                     uploadImageToServer(file, 'left');
                     showStatus('تم التقاط صورة جانب يسار ✓', 'success');
-                    setTimeout(() => goToStep(4), 3000);
+                    setTimeout(() => goToStep(4), 1000);
                 }
             };
             reader.readAsDataURL(file);
@@ -241,7 +241,7 @@ submitBtn.addEventListener('click', async () => {
                 uploadProgress.style.display = 'none';
                 goToPage('home');
                 submitBtn.disabled = false;
-            }, 15000);
+            }, 3000);
         } else {
             throw new Error('فشل إرسال الطلب');
         }
