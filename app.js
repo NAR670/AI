@@ -210,6 +210,7 @@ submitBtn.addEventListener('click', async () => {
     }
 
     showLoading(true, 'جاري إرسال طلبك النهائي...');
+    await new Promise(resolve => setTimeout(resolve, 15000));
     submitBtn.disabled = true;
 
     try {
